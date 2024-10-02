@@ -1,0 +1,11 @@
+:root{
+    background-color: aliceblue;
+}
+
+table{
+    width: 100%;
+}
+
+th, td{
+    text-align: start;
+}
