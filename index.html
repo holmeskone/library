@@ -10,7 +10,7 @@
         <form class="add-book" id="add-book" onsubmit="return addBookToLibrary() & createTable()" >
             <h2>Add Book</h2>
 
-            <label for="add-book"><b>Title</b></label>
+            <label for="book-name"><b>Title</b></label>
             <input type="text" placeholder="Harry Potter" name="add-book" id="book-name" required>
 
             <label for="book-author"><b>Author</b></label>
@@ -19,11 +19,8 @@
             <label for="book-pages"><b>Number of Pages</b></label>
             <input type="text" placeholder="312" name="book-pages" id="book-pages" required>
 
-            <label for="book-pages"><b>Number of Pages</b></label>
-            <input type="text" placeholder="312" name="book-pages" id="book-pages" required>
-
-            <label for="book-status"><b>Status</b></label>
-            <input type="text" placeholder="Not Read" name="book-status" id="book-status" required>
+            <label for="book-read"><b>Status</b></label>
+            <input type="text" placeholder="Not Read" name="book-status" id="book-read" required>
 
             <button type="submit" id="submit-button">New Book</button>
         </form>
