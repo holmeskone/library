@@ -1,8 +1,11 @@
 const inputBook = document.getElementById("book-name");
+const inputAuthor = document.getElementById("book-author");
+const inputPages = document.getElementById("book-pages");
+const inputRead = document.getElementById("book-read");
 const submitBook = document.getElementById("submit-button");
 
 
-const myLibrary = ["HarryPotter", "LoR", "Jumanji"];
+const myLibrary = [];
 
 function Book() {
   // the constructor...
@@ -23,16 +26,19 @@ function addBookToLibrary() {
 // Display value of inputted book 
 document.querySelector("form.add-book").addEventListener("submit", function(event) { // Trigger this function when the submit type has been clicked
     event.preventDefault(); // Make the page not refresh when the form is submitted
-    document.getElementById("display").innerText = document.getElementById("book-name").value; // add value of book-name (input) into the div 'display'
+    document.getElementById("display").innerText = inputBook.value; // add value of book-name (input) into the div 'display'
+    inputBook.value = '';
+
 });
 
 //Display value in a table
 function createTable(){
+
     // creates a <table> element, a <thead> and a <tbody> element
     const tbl = document.createElement("table");
-    const thead = document.createElement("thead");
     const tblBody = document.createElement("tbody");
-
+    if (myLibrary.length < 2){
+    const thead = document.createElement("thead");
     //creates a header for the table
     const headerRow = document.createElement("tr");
 
@@ -56,7 +62,7 @@ function createTable(){
         for(j=0; j<6; j++){
             const cell = document.createElement("td");
             if(j===0){
-            const cellText = document.createTextNode(myLibrary[i]);
+            const cellText = document.createTextNode(inputBook.value);
             cell.appendChild(cellText);
         }
             row.appendChild(cell);
@@ -66,6 +72,17 @@ function createTable(){
     tbl.appendChild(thead); //Add the thead to the table
     tbl.appendChild(tblBody); // Add the table body to the table
     document.body.appendChild(tbl);
+    }
+    else{
+        const row = document.createElement("tr");
+        const cell = document.createElement("td");
+        const cellText = document.createTextNode(inputBook.value);
+        cell.appendChild(cellText);
+        row.appendChild(cell);
+        tblBody.appendChild(row);
+        tbl.appendChild(tblBody); // Add the table body to the table
+        document.body.appendChild(tbl);
+    }
 
 }
 
