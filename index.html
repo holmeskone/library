@@ -6,9 +6,11 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <form onsubmit="return addBookToLibrary()">
+        <label for="add-book"></label>
+        <input type="text" name="add-book" id="add-book" required>
+        <button type="submit" id="submit-button">Add Book</button>
+    </form>
     <script src="script.js"></script>
-    <label for="add-book"></label>
-    <input type="text" name="add-book" id="add-book" required>
-    <button type="submit">Add Book</button>
 </body>
 </html>
