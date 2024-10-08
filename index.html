@@ -7,26 +7,25 @@
 </head>
 <body>
     <div class="add-book-popup" id="add-book-popup">
-        <form class="add-book" id="add-book" onsubmit="return addBookToLibrary() & createTable()" >
+        <form class="add-book" id="add-book" onsubmit="return addBookToLibrary()" >
             <h2>Add Book</h2>
 
             <label for="book-name"><b>Title</b></label>
             <input type="text" placeholder="Harry Potter" name="add-book" id="book-name" required>
 
             <label for="book-author"><b>Author</b></label>
-            <input type="text" placeholder="J.K Rowling" name="book-author" id="book-author" required>
+            <input type="text" placeholder="J.K Rowling" name="book-author" id="book-author"  >
 
             <label for="book-pages"><b>Number of Pages</b></label>
-            <input type="text" placeholder="312" name="book-pages" id="book-pages" required>
+            <input type="text" placeholder="312" name="book-pages" id="book-pages" >
 
             <label for="book-read"><b>Status</b></label>
-            <input type="text" placeholder="Not Read" name="book-status" id="book-read" required>
+            <input type="text" placeholder="Not Read" name="book-status" id="book-read" >
 
             <button type="submit" id="submit-button">New Book</button>
         </form>
     </div>
-    <div class="display" id="display">
-    </div>
+    <div class="display-library" id="display-library" ></div>
     <script src="script.js"></script>
 </body>
 </html>
