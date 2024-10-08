@@ -33,13 +33,46 @@ function addBookToLibrary() {
 
 function displayBook(){
     const lastBook = myLibrary[myLibrary.length - 1];
-    const parentDiv = document.getElementById('display-library');
-    const insertValue = document.createElement("p");
-    insertValue.innerHTML = `${lastBook.title}, ${lastBook.author}, ${lastBook.pages}, ${lastBook.read}`;
-    parentDiv.appendChild(insertValue);
+    // const parentDiv = document.getElementById('display-library');
+    // const insertValue = document.createElement("p");
+    // insertValue.innerHTML = `${lastBook.title}, ${lastBook.author}, ${lastBook.pages}, ${lastBook.read}`;
+    // parentDiv.appendChild(insertValue);
+    const row = document.createElement("tr"); // Create the row that will contain information on the book
+    row.setAttribute("id", "row-" + (myLibrary.length - 1));
+    const titleCell = document.createElement("td"); // Create the "cell" for the first column starting from the left
+    const titleInfo = document.createTextNode(`${lastBook.title}`);// Create the text for the data for the first column starting from the left
+    const authorCell = document.createElement("td");
+    const authorInfo = document.createTextNode(`${lastBook.author}`);
+    const pagesCell = document.createElement("td");
+    const pagesInfo = document.createTextNode(`${lastBook.pages}`);
+    const readCell = document.createElement("td");
+    const readInfo = document.createTextNode(`${lastBook.read}`);
+    const editCell = document.createElement("td");// Create the "cell" for the edit column 
+    editCell.innerText = '✍️';    // Add the emoji for that section
+    const removeCell = document.createElement("td"); // Create the "cell" for the delete column 
+    removeCell.setAttribute("id", myLibrary.length - 1);
+    const btn = document.createElement('button');
+    btn.type = "button";
+    btn.className = "remove-button";
+    btn.onclick = "removeBook(this.id)";
+    removeCell.appendChild(btn);
+    titleCell.appendChild(titleInfo);
+    authorCell.appendChild(authorInfo);
+    pagesCell.appendChild(pagesInfo);
+    readCell.appendChild(readInfo);
+    row.appendChild(titleCell);
+    row.appendChild(authorCell);
+    row.appendChild(pagesCell);
+    row.appendChild(readCell);
+    row.appendChild(editCell);
+    row.appendChild(removeCell);
+    const tblBody = document.getElementById('table-data');
+    tblBody.appendChild(row);
 };
 
-
+function removeBook(clickedId){
+    document.getElementById("row-"+clickedId).remove();
+}
 
 // // Display value of inputted book 
 // document.querySelector("form.add-book").addEventListener("submit", function(event) { // Trigger this function when the submit type has been clicked
