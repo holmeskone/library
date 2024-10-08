@@ -50,11 +50,15 @@ function displayBook(){
     const editCell = document.createElement("td");// Create the "cell" for the edit column 
     editCell.innerText = '✍️';    // Add the emoji for that section
     const removeCell = document.createElement("td"); // Create the "cell" for the delete column 
-    removeCell.setAttribute("id", myLibrary.length - 1);
+    // removeCell.setAttribute("id", myLibrary.length - 1);
     const btn = document.createElement('button');
     btn.type = "button";
     btn.className = "remove-button";
-    btn.onclick = "removeBook(this.id)";
+    btn.onclick = function() {
+        removeBook(this.id);  // 'this' refers to the button element
+      };
+    btn.innerHTML = '❌';
+    btn.setAttribute("id", myLibrary.length - 1);
     removeCell.appendChild(btn);
     titleCell.appendChild(titleInfo);
     authorCell.appendChild(authorInfo);
