@@ -19,30 +19,46 @@ function Book(title,author,pages,read) {
 
 // //Add book to myLibrary array and print it
 function addBookToLibrary() {
-//   // do stuff here
-//     addBook = inputBook.value; // Gets the inputed value 
-//     myLibrary.push(addBook); // add input to array
-    // console.log(myLibrary); // print array
-    return false;  // Make the page not refresh when the form is submitted
-
-};
-
-// Display value of inputted book 
-document.querySelector("form.add-book").addEventListener("submit", function(event) { // Trigger this function when the submit type has been clicked
-    event.preventDefault(); // Make the page not refresh when the form is submitted
     const bookName = inputBook.value;
     const bookAuthor = inputAuthor.value;
     const bookPages = inputPages.value;
     const bookRead = inputRead.value;
     let newBook = new Book(bookName,bookAuthor,bookPages,bookRead);
-    myLibrary.push(newBook);
-    console.log(newBook);
+    myLibrary.push(newBook); // add input to array
+    console.log(myLibrary); // print array
+    // return false;  // Make the page not refresh when the form is submitted
+
+
+};
+
+function displayBook(){
+    const lastBook = myLibrary[myLibrary.length - 1];
     const parentDiv = document.getElementById('display-library');
     const insertValue = document.createElement("p");
-    insertValue.className = 'book-information';
-    const book = document.getElementsByClassName("book-information").innerHTML ='title ' + newBook.title + ', Author ' + newBook.author + ', Pages ' + newBook.pages + ', Status ' + newBook.read; // add value of book-name (input) into the div 'display'
-    const booknode = document.createTextNode(book);
-    parentDiv.appendChild(booknode);
+    insertValue.innerHTML = `${lastBook.title}, ${lastBook.author}, ${lastBook.pages}, ${lastBook.read}`;
+    parentDiv.appendChild(insertValue);
+};
+
+
+
+// // Display value of inputted book 
+// document.querySelector("form.add-book").addEventListener("submit", function(event) { // Trigger this function when the submit type has been clicked
+//     event.preventDefault(); // Make the page not refresh when the form is submitted
+//     const bookName = inputBook.value;
+//     const bookAuthor = inputAuthor.value;
+//     const bookPages = inputPages.value;
+//     const bookRead = inputRead.value;
+//     let newBook = new Book(bookName,bookAuthor,bookPages,bookRead);
+//     myLibrary.push(newBook);
+//     console.log(newBook);
+//     const parentDiv = document.getElementById('display-library');
+//     const insertValue = document.createElement("p");
+//     insertValue.className = 'book-information';
+//     const book = document.getElementsByClassName("book-information").innerHTML ='title ' + newBook.title + ', Author ' + newBook.author + ', Pages ' + newBook.pages + ', Status ' + newBook.read; // add value of book-name (input) into the div 'display'
+//     const booknode = document.createTextNode(book);
+//     console.log(typeof(booknode));
+//     document.body.appendChild(newBook);
+// });
 
     // if(myLibrary.length<=1){
     //     insertValue.className = 'book-information'
@@ -70,7 +86,7 @@ document.querySelector("form.add-book").addEventListener("submit", function(even
     // // displayDiv.appendChild(insertValue);
     // console.log(myLibrary.length);
 
-});
+
 
 
 
