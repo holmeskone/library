@@ -1,11 +1,57 @@
-:root{
-    background-color: aliceblue;
+html{
+    background-color: #FFFDF1;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 400;
+    margin-top: 3rem;
+    color: #2C513B;
+}
+
+h2{
+    text-align: center;
+}
+
+.inputs{
+    display: flex;
+    justify-content: space-evenly;
+}
+input {
+    width: 7rem;
+    margin-right: 2rem;
+    border-radius: 5px;
+    border-width: 1px;
+}
+
+#book-pages{
+    width: 3rem;
 }
 
 table{
+    margin-top: 3rem;
     width: 100%;
 }
 
 th, td{
-    text-align: start;
+    text-align: center;
+
+}
+
+.edit-button, .remove-button{
+background-color: transparent;
+border: none;
+}
+
+button{
+    background-color: #2C513B;
+    color: white;
+    border-radius: 5px;
+    width: 7rem;
+}
+
+thead{
+    font-weight: 400;
+    margin-top: 3rem;
+}
+
+tbody{
+    font-weight: 200;
 }
