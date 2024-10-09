@@ -25,18 +25,11 @@ function addBookToLibrary() {
     const bookRead = inputRead.value;
     let newBook = new Book(bookName,bookAuthor,bookPages,bookRead);
     myLibrary.push(newBook); // add input to array
-    console.log(myLibrary); // print array
     // return false;  // Make the page not refresh when the form is submitted
-
-
 };
 
 function displayBook(){
     const lastBook = myLibrary[myLibrary.length - 1];
-    // const parentDiv = document.getElementById('display-library');
-    // const insertValue = document.createElement("p");
-    // insertValue.innerHTML = `${lastBook.title}, ${lastBook.author}, ${lastBook.pages}, ${lastBook.read}`;
-    // parentDiv.appendChild(insertValue);
     const row = document.createElement("tr"); // Create the row that will contain information on the book
     row.setAttribute("id", (myLibrary.length - 1));
     const titleCell = document.createElement("td"); // Create the "cell" for the first column starting from the left
@@ -59,8 +52,6 @@ function displayBook(){
       };
     editButton.setAttribute("id", ("edit-"+(myLibrary.length - 1)));
     editCell.appendChild(editButton);
-    let trElement = editButton.parentElement;
-    console.log(trElement);
     //Remove Section
     const removeCell = document.createElement("td"); // Create the "cell" for the delete column 
     removeCell.className = "remove-button-cell"
@@ -84,8 +75,6 @@ function displayBook(){
     row.appendChild(removeCell);
     const tblBody = document.getElementById('table-data');
     tblBody.appendChild(row);
-    let tbodyelement = trElement.closest("tr");
-    console.log(tbodyelement.children);
     
 };
 
