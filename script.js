@@ -1,17 +1,16 @@
+// Select form inputs
 const inputBook = document.getElementById("book-name");
 const inputAuthor = document.getElementById("book-author");
 const inputPages = document.getElementById("book-pages");
 const inputRead = document.getElementById("book-read");
 const submitBook = document.getElementById("submit-button");
 
-
-class Book{
-    constructor(title,author,pages,read) {
-  // the constructor...
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.read = read;
+class Book {
+    constructor(title, author, pages, read) {
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.read = read;
     }
 }
 
@@ -23,87 +22,85 @@ class Library {
     addBook(bookName, bookAuthor, bookPages, bookRead) {
         const newBook = new Book(bookName, bookAuthor, bookPages, bookRead);
         this.myLibrary.push(newBook); // Add book to the library array
+        this.displayBook(); // Call displayBook to render the book on the table
+    }
+
+    displayBook() {
+        const lastBook = this.myLibrary[this.myLibrary.length - 1]; // Get the latest book
+        const row = document.createElement("tr"); // Create the row
+        row.setAttribute("id", this.myLibrary.length - 1); // Set the row ID
+
+        // Create cells for book details
+        const titleCell = document.createElement("td");
+        const authorCell = document.createElement("td");
+        const pagesCell = document.createElement("td");
+        const readCell = document.createElement("td");
+
+        titleCell.textContent = lastBook.title;
+        authorCell.textContent = lastBook.author;
+        pagesCell.textContent = lastBook.pages;
+        readCell.textContent = lastBook.read;
+
+        // Add Edit Button
+        const editCell = document.createElement("td");
+        const editButton = document.createElement("button");
+        editButton.textContent = "✍️";
+        editButton.type = "button";
+        editButton.className = "edit-button";
+        editButton.onclick = () => this.editBook(row.id); // Bind the instance method
+        editCell.appendChild(editButton);
+
+        // Add Remove Button
+        const removeCell = document.createElement("td");
+        const removeButton = document.createElement("button");
+        removeButton.textContent = "❌";
+        removeButton.type = "button";
+        removeButton.className = "remove-button";
+        removeButton.onclick = () => this.removeBook(row.id); // Bind the instance method
+        removeCell.appendChild(removeButton);
+
+        // Append all cells to the row
+        row.appendChild(titleCell);
+        row.appendChild(authorCell);
+        row.appendChild(pagesCell);
+        row.appendChild(readCell);
+        row.appendChild(editCell);
+        row.appendChild(removeCell);
+
+        // Append the row to the table body
+        document.getElementById("table-data").appendChild(row);
+    }
+
+    removeBook(rowId) {
+        document.getElementById(rowId).remove(); // Remove the row from the DOM
+        this.myLibrary.splice(rowId, 1); // Remove the book from the array
+    }
+
+    editBook(rowId) {
+        const row = document.getElementById(rowId);
+        const cells = row.children;
+
+        const updatedTitle = prompt("Enter the updated title:", cells[0].textContent);
+        const updatedAuthor = prompt("Enter the updated author:", cells[1].textContent);
+        const updatedPages = prompt("Enter the updated number of pages:", cells[2].textContent);
+        const updatedRead = prompt("Enter the updated read status:", cells[3].textContent);
+
+        cells[0].textContent = updatedTitle;
+        cells[1].textContent = updatedAuthor;
+        cells[2].textContent = updatedPages;
+        cells[3].textContent = updatedRead;
+
+        this.myLibrary[rowId] = new Book(updatedTitle, updatedAuthor, updatedPages, updatedRead); // Update the library array
     }
 }
 
-function displayBook(){
-    const lastBook = myLibrary[myLibrary.length - 1];
-    const row = document.createElement("tr"); // Create the row that will contain information on the book
-    row.setAttribute("id", (myLibrary.length - 1));
-    const titleCell = document.createElement("td"); // Create the "cell" for the first column starting from the left
-    const titleInfo = document.createTextNode(`${lastBook.title}`);// Create the text for the data for the first column starting from the left
-    const authorCell = document.createElement("td");
-    const authorInfo = document.createTextNode(`${lastBook.author}`);
-    const pagesCell = document.createElement("td");
-    const pagesInfo = document.createTextNode(`${lastBook.pages}`);
-    const readCell = document.createElement("td");
-    const readInfo = document.createTextNode(`${lastBook.read}`);
-    //Edit section
-    const editCell = document.createElement("td");// Create the "cell" for the edit column 
-    editCell.className = "edit-button-cell"
-    const editButton = document.createElement('button');
-    editButton.innerHTML = '✍️';    // Add the emoji for that section
-    editButton.type = "button";
-    editButton.className = "edit-button";
-    editButton.onclick = function() {
-        editBook(this.id);  // 'this' refers to the button element
-      };
-    editButton.setAttribute("id", ("edit-"+(myLibrary.length - 1)));
-    editCell.appendChild(editButton);
-    //Remove Section
-    const removeCell = document.createElement("td"); // Create the "cell" for the delete column 
-    removeCell.className = "remove-button-cell"
-    const removeButton = document.createElement('button');
-    removeButton.type = "button";
-    removeButton.className = "remove-button";
-    removeButton.onclick = function() { removeBook(this.id);  // 'this' refers to the button element
-      };
-    removeButton.innerHTML = '❌';
-    removeButton.setAttribute("id", ("remove-"+(myLibrary.length - 1)));
-    removeCell.appendChild(removeButton);
-    titleCell.appendChild(titleInfo);
-    authorCell.appendChild(authorInfo);
-    pagesCell.appendChild(pagesInfo);
-    readCell.appendChild(readInfo);
-    row.appendChild(titleCell);
-    row.appendChild(authorCell);
-    row.appendChild(pagesCell);
-    row.appendChild(readCell);
-    row.appendChild(editCell);
-    row.appendChild(removeCell);
-    const tblBody = document.getElementById('table-data');
-    tblBody.appendChild(row);
-    
+// Create an instance of the Library class
+const library = new Library();
+
+// Add form submit event listener
+const form = document.getElementById("add-book");
+form.onsubmit = (e) => {
+    e.preventDefault(); // Prevent form submission from refreshing the page
+    library.addBook(inputBook.value, inputAuthor.value, inputPages.value, inputRead.value);
+    form.reset(); // Reset the form fields
 };
-
-function removeBook(clickedId){
-    let removeRow = clickedId.replace('remove-', "");
-    document.getElementById(removeRow).remove();
-}
-
-function editBook(clickedId){
-    // Get the parent row of the clicked button
-    let editRow = clickedId.replace('edit-', "");
-    let editTitleCell = document.getElementById(editRow).cells[0];
-    let editAuthorCell = document.getElementById(editRow).cells[1];
-    let editPagesCell = document.getElementById(editRow).cells[2];
-    let editReadCell = document.getElementById(editRow).cells[3];
-    let editTitleInput =
-                prompt("Enter the updated title:",
-                    editTitleCell.innerHTML);
-    let editAuthorInput =
-                prompt("Enter the updated author:",
-                    editAuthorCell.innerHTML);
-    let editPagesInput =
-                prompt("Enter the updated number of pages:",
-                    editPagesCell.innerHTML);
-
-    let editReadInput =
-                prompt("Enter the updated status:",
-                    editReadCell.innerHTML);
-
-    editTitleCell.innerHTML = editTitleInput;
-    editAuthorCell.innerHTML = editAuthorInput;
-    editPagesCell.innerHTML = editPagesInput;
-    editReadCell.innerHTML = editReadInput;
-}
