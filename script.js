@@ -5,28 +5,26 @@ const inputRead = document.getElementById("book-read");
 const submitBook = document.getElementById("submit-button");
 
 
-const myLibrary = [];
-
-function Book(title,author,pages,read) {
+class Book{
+    constructor(title,author,pages,read) {
   // the constructor...
     this.title = title;
     this.author = author;
     this.pages = pages;
     this.read = read;
+    }
 }
 
+class Library {
+    constructor() {
+        this.myLibrary = []; // Array to store books
+    }
 
-
-// //Add book to myLibrary array and print it
-function addBookToLibrary() {
-    const bookName = inputBook.value;
-    const bookAuthor = inputAuthor.value;
-    const bookPages = inputPages.value;
-    const bookRead = inputRead.value;
-    let newBook = new Book(bookName,bookAuthor,bookPages,bookRead);
-    myLibrary.push(newBook); // add input to array
-    // return false;  // Make the page not refresh when the form is submitted
-};
+    addBook(bookName, bookAuthor, bookPages, bookRead) {
+        const newBook = new Book(bookName, bookAuthor, bookPages, bookRead);
+        this.myLibrary.push(newBook); // Add book to the library array
+    }
+}
 
 function displayBook(){
     const lastBook = myLibrary[myLibrary.length - 1];
