@@ -19,15 +19,15 @@
                 </div>
                 <div class="input">
                     <label for="book-author"><b>Author</b></label>
-                    <input type="text" placeholder="J.K Rowling" name="book-author" id="book-author"  >
+                    <input type="text" placeholder="J.K Rowling" name="book-author" id="book-author" required pattern="[a-zA-Z]*">
                 </div>
                 <div class="input">
                     <label for="book-pages"><b>Number of Pages</b></label>
-                    <input type="text" placeholder="312" name="book-pages" id="book-pages" >
+                    <input type="number" placeholder="312" name="book-pages" id="book-pages" required>
                 </div>  
                 <div class="input">   
-                    <label for="book-read"><b>Status</b></label>
-                    <input type="text" placeholder="Not Read" name="book-status" id="book-read" >
+                    <label for="book-read"><b>Status (Read/Not Read)</b></label>
+                    <input type="text" placeholder="Not Read" name="book-status" id="book-read" required;>
                 </div>
 
                 <button type="submit" id="submit-button">New Book</button>
