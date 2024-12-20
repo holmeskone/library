@@ -104,3 +104,28 @@ form.onsubmit = (e) => {
     library.addBook(inputBook.value, inputAuthor.value, inputPages.value, inputRead.value);
     form.reset(); // Reset the form fields
 };
+
+
+// Using Constraint Validation API to customise message on the library inputs
+
+const authorInput = document.getElementById('book-author')
+
+authorInput.addEventListener('input', (event)=> {
+ if(authorInput.validity.patternMismatch){
+    authorInput.setCustomValidity('Please enter a name with no numbers');
+ }
+ else{
+    authorInput.setCustomValidity('');
+ }})
+;
+
+const readInput = document.getElementById('book-read')
+readInput.addEventListener('input', (event)=> {
+const regex =  /\b(not\s+)?read(ing)?\b/i;
+ if(!regex.test(readInput.value)){
+    readInput.setCustomValidity('Please enter Read or Not Read');
+ }
+ else{
+    readInput.setCustomValidity('');
+ }})
+;
